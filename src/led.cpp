@@ -28,22 +28,18 @@ void handleLeds(int colors[], int currentSteps, bool buttonPressed)
 {
     if (buttonPressed) {
         for (int index = 0; index < 4; ++index) {
-            digitalWrite(LEDS[index], HIGH);
+            analogWrite(LEDS[index], LED_OFF);
         }
     } else {
         unsigned long timeWithinCycle
-            = (millis() - startTime) % (BLINK_DURATION * currentSteps * 2 + BLINK_DURATION * 3);
+            = (millis() - startTime) % (BLINK_DURATION * currentSteps * 2 + BLINK_DURATION * 2);
         int currentColor = timeWithinCycle / (BLINK_DURATION * 2);
         bool ledOn = (timeWithinCycle % (BLINK_DURATION * 2)) <= BLINK_DURATION;
-        // turn all LEDS off first
         for (int index = 0; index < 4; ++index) {
-            digitalWrite(LEDS[index], LOW);
-        }
-        if (ledOn && currentColor < currentSteps) {
-            digitalWrite(LEDS[colors[currentColor]], HIGH);
-        } else if (currentColor == currentSteps) {
-            for (int index = 0; index < 4; ++index) {
+            if (index == colors[currentColor] && ledOn && currentColor < currentSteps) {
                 digitalWrite(LEDS[index], HIGH);
+            } else {
+                analogWrite(LEDS[index], LED_OFF);
             }
         }
     }

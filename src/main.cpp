@@ -14,10 +14,10 @@ void setup()
     pinMode(LED_GREEN, OUTPUT);
     pinMode(LED_BLUE, OUTPUT);
 
-    digitalWrite(LED_YELLOW, LOW);
-    digitalWrite(LED_RED, LOW);
-    digitalWrite(LED_GREEN, LOW);
-    digitalWrite(LED_BLUE, LOW);
+    analogWrite(LED_YELLOW, LED_OFF);
+    analogWrite(LED_RED, LED_OFF);
+    analogWrite(LED_GREEN, LED_OFF);
+    analogWrite(LED_BLUE, LED_OFF);
 
     // Setup Buttons
     pinMode(BUTTON_YELLOW, INPUT_PULLUP);
